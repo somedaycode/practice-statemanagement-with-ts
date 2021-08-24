@@ -30,7 +30,8 @@ export default class Main extends Component<void, AppLists> {
     if (appLists) {
       this.setState({ appLists: JSON.parse(appLists) });
     } else {
-      this.setState({
+      this.state = {
+        ...this.state,
         appLists: [
           {
             component: 'alarm',
@@ -53,7 +54,7 @@ export default class Main extends Component<void, AppLists> {
             title: '사진3'
           }
         ]
-      });
+      };
     }
   }
 
