@@ -3,11 +3,12 @@ import { subscribe } from '@src/lib/observer';
 export default class Component<T = void, S = unknown> {
   public $target: HTMLElement;
   public props: T;
-  public state?: S;
+  public state: S | null;
   public keys: string[];
 
   constructor($target: HTMLElement, props: T) {
     this.$target = $target;
+    this.state = null;
     this.props = props;
     this.keys = [];
     this.init();
@@ -23,6 +24,13 @@ export default class Component<T = void, S = unknown> {
 
   template() {
     return '';
+  }
+
+  createElement($parent: HTMLElement, tagName: string, className: string) {
+    const $el = document.createElement(tagName);
+    if (className) $el.className = className;
+    $parent.appendChild($el);
+    return $el;
   }
 
   mounted() {}
