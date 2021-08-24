@@ -1,0 +1,31 @@
+.alarm {
+  button {
+    background: #fff;
+    outline: 0;
+  }
+}
+
+.alarm__select {
+  padding: 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.alarm__list {
+  margin-top: 0.5rem;
+  padding: 0 0.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.save-btn {
+  border: 1px solid blue;
+  color: blue;
+}
+
+.delete-btn {
+  color: darkorange;
+  border: 1px solid darkorange;
+}

@@ -1,2 +1,14 @@
-@import './src/style/reset.scss';
-@import './src/style/variable.scss';
+@import '@src/style/reset.scss';
+@import '@src/style/variable.scss';
+@import '@src/style/header';
+@import '@src/style/home';
+@import '@src/style/alarm';
+@import '@src/style/memo';
+@import '@src/style/picture';
+
+#root {
+  margin: 0 auto;
+  height: 100vh;
+  width: 30rem;
+  background-color: bisque;
+}

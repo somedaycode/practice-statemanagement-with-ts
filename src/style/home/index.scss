@@ -1,0 +1,19 @@
+.home-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  background-color: coral;
+  border-radius: 1rem;
+}
+
+.dragstart {
+  opacity: 0.5;
+}

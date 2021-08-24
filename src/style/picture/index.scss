@@ -1,0 +1,30 @@
+.picture {
+  section {
+    background-color: black;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.picture-container {
+  display: flex;
+  overflow: hidden;
+}
+
+.picture__item:not(:first-child) {
+  margin-left: 1.5rem;
+}
+
+.preview-clicked {
+  border: 2px solid deeppink;
+}
+
+.preview-img {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.showing-img {
+  width: 100%;
+}
