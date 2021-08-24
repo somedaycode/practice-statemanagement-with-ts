@@ -3,8 +3,8 @@ type GlobalStateType = {
 };
 const globalState: GlobalStateType = {};
 
-const subscribe = (key: string, className: string, observer: Function) =>
-  globalState[key]._observers.set(className, observer);
+const subscribe = (key: string, observer: Function) =>
+  globalState[key]._observers.set(key, observer);
 
 const _notify = (key: string) =>
   globalState[key]._observers.forEach((observer: Function) => observer());
