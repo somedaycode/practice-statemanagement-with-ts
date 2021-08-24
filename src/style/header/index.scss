@@ -5,6 +5,12 @@
   position: relative;
 }
 
+.btns-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .nav-date {
   position: absolute;
   left: 50%;
