@@ -1,28 +1,36 @@
 import Component from '@src/core/Component';
 
+import { getState, setState } from '@src/lib/observer';
+import { headerDateStore } from '@src/store/dateStore';
+
 type TIME = {
   text: string | null;
   timer: NodeJS.Timer | null;
 };
 
 export default class HeaderDate extends Component<void, TIME> {
+  constructor($target: HTMLElement) {
+    super($target);
+    this.keys = [headerDateStore];
+    this.subscribe();
+  }
+
   template() {
-    const { text } = this.state as TIME;
+    const { text } = getState<TIME>(headerDateStore);
     return `${text}`;
   }
 
   setup() {
-    this.state = { timer: null, text: '' };
     this.showDate();
   }
 
   showDate() {
-    if (this.state == null) return;
+    const currentTime = getState<TIME>(headerDateStore);
     const text = this.getText();
     let timer = setTimeout(() => {
-      clearTimeout(this.state?.timer as NodeJS.Timer);
-      if (this.state?.text != null) {
-        this.setState({ ...this.state, text, timer });
+      clearTimeout(currentTime?.timer as NodeJS.Timer);
+      if (currentTime?.text != null) {
+        setState<TIME>(headerDateStore, { ...currentTime, text, timer });
         this.showDate();
       }
     }, 1000);
