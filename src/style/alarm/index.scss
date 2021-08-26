@@ -11,6 +11,16 @@
   justify-content: space-between;
 }
 
+.alarm-time {
+  width: 5rem;
+  height: 2rem;
+
+  &[type='number']:hover::-webkit-inner-spin-button {
+    width: 1rem;
+    height: 1.8rem;
+  }
+}
+
 .alarm__list {
   margin-top: 0.5rem;
   padding: 0 0.5rem;
