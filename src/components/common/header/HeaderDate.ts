@@ -1,7 +1,7 @@
 import Component from '@src/core/Component';
 
 import { getState, setState } from '@src/lib/observer';
-import { headerDateStore } from '@src/store/dateStore';
+import { headerDateStore } from '@src/store/headerStore';
 
 type TIME = {
   text: string | null;
@@ -25,12 +25,14 @@ export default class HeaderDate extends Component<void, TIME> {
   }
 
   showDate() {
+    const setDate = setState<TIME>(headerDateStore);
     const currentTime = getState<TIME>(headerDateStore);
+    clearTimeout(currentTime?.timer as NodeJS.Timer);
+
     const text = this.getText();
     let timer = setTimeout(() => {
-      clearTimeout(currentTime?.timer as NodeJS.Timer);
       if (currentTime?.text != null) {
-        setState<TIME>(headerDateStore, { ...currentTime, text, timer });
+        setDate({ ...currentTime, text, timer });
         this.showDate();
       }
     }, 1000);
