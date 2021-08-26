@@ -24,16 +24,18 @@ const getState = <T>(key: string): T => {
   return globalState[key]._state;
 };
 
-const setState = <T>(key: string, newState: ((arg: T) => T) | T): void => {
-  if (!(key in globalState)) throw Error('존재하지 않는 key값 입니다.');
+const setState =
+  <T>(key: string) =>
+  (newState: ((arg: T) => T) | T): void => {
+    if (!(key in globalState)) throw Error('존재하지 않는 key값 입니다.');
 
-  if (newState instanceof Function) {
-    const state = getState<T>(key);
-    globalState[key]._state = newState(state);
-  } else {
-    globalState[key]._state = newState;
-  }
-  _notify(key);
-};
+    if (newState instanceof Function) {
+      const state = getState<T>(key);
+      globalState[key]._state = newState(state);
+    } else {
+      globalState[key]._state = newState;
+    }
+    _notify(key);
+  };
 
 export { subscribe, initState, getState, setState };
