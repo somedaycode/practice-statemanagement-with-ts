@@ -10,4 +10,9 @@ const headerDateStore = initState<TIME>({
   value: { timer: null, text: '' }
 });
 
-export { headerDateStore };
+const headerLocation = initState({
+  key: 'headerLocation',
+  value: { isMain: false }
+});
+
+export { headerDateStore, headerLocation };
