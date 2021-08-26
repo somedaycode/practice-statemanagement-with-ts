@@ -1,6 +1,7 @@
-import Header from '@src/components/common/header';
-import Main from '@src/components/main';
 import Component from '@src/core/Component';
+
+import Main from '@src/components/main';
+import Header from '@src/components/common/header';
 
 export default class Home extends Component {
   template() {
@@ -22,8 +23,4 @@ export default class Home extends Component {
       e.preventDefault();
     });
   }
-
-  // setEvent() {
-  //   this.addEvent('click', '.second', this.switchPage.bind(this));
-  // }
 }
