@@ -1,8 +1,6 @@
-# 타입스크립트로 상태관리를 하기 위한 보일러플레이트
+# 타입스크립트로 상태관리를 하는 모바일 뷰 에뮬레이터
 
-```ts
-git remote add setting https://github.com/somedaycode/vanila-state-boilerplate.git
-git pull setting main
+### 목표
 
-npm install
-```
+- public 레포지토리로 공개되어 있는 11번가 과제를 타입스크립트를 이용하여 상태관리하며 구현해보기
+- 상태는 observer.ts를 통해 전역으로 관리
