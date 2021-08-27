@@ -2,7 +2,11 @@ import Component from '@src/core/Component';
 import HeaderBtns from './HeaderBtns';
 import HeaderDate from './HeaderDate';
 
-export default class Header extends Component {
+export type HeaderSetup = {
+  isSetup?: boolean;
+};
+
+export default class Header extends Component<HeaderSetup> {
   template() {
     return `
     <div data-component="headerBtns" class="btns-container"></div>
@@ -15,6 +19,6 @@ export default class Header extends Component {
     new HeaderBtns($btns as HTMLDivElement);
 
     const $nav = this.$target.querySelector('[data-component=headerDate]');
-    new HeaderDate($nav as HTMLElement);
+    new HeaderDate($nav as HTMLElement, this.props);
   }
 }

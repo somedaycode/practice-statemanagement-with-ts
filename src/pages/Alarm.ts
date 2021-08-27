@@ -35,7 +35,7 @@ export default class Alarm extends Component {
       '[data-component=alarmLists]'
     );
 
-    new Header($header as HTMLElement);
+    new Header($header as HTMLElement, { isSetup: false });
     new SettingAlarm($settingAlarm as HTMLDivElement);
     new AlarmLists($alarmLists as HTMLUListElement);
   }
