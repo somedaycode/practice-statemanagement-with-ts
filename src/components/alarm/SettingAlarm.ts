@@ -35,12 +35,19 @@ export default class SettingAlarm extends Component {
 
     const dayText = isAfternoon ? '오후' : '오전';
     const newAlarm = `${dayText} ${hour}시 ${minute}분`;
-    setAlarmList([...alarmList, newAlarm]);
+    const saveAlarms = [...alarmList, newAlarm];
+    setAlarmList(saveAlarms);
+    this.saveIntoLocal(saveAlarms);
+
     setAlarmTime({
       isAfternoon: false,
       hour: null,
       minute: null
     });
+  }
+
+  saveIntoLocal(alarms: AlarmItems) {
+    localStorage.setItem('alarm', JSON.stringify(alarms));
   }
 
   handleSelectDay(e: Event) {
