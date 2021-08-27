@@ -4,7 +4,7 @@ export default class Router {
   }
 
   init(el) {
-    this.renderHTML(el, this.routes['/']);
+    this.renderHTML(el, this.routes[location.pathname]);
     window.addEventListener('popstate', () =>
       this.renderHTML(el, this.routes[location.pathname])
     );
@@ -16,6 +16,10 @@ export default class Router {
     };
     window.history.pushState({}, pathName, location.origin + pathName);
     this.renderHTML(el, this.routes[pathName]);
+  }
+
+  pop() {
+    history.back();
   }
 
   renderHTML(el, route) {
