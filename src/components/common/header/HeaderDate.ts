@@ -1,17 +1,19 @@
 import Component from '@src/core/Component';
 
 import { getState, setState } from '@src/lib/observer';
+import { AlarmItems, alarmItems } from '@src/store/alarmStore';
 import { headerDateStore } from '@src/store/headerStore';
+import { HeaderSetup } from '.';
 
 type TIME = {
   text: string | null;
   timer: NodeJS.Timer | null;
 };
 
-export default class HeaderDate extends Component<void, TIME> {
-  constructor($target: HTMLElement) {
-    super($target);
-    this.keys = [headerDateStore];
+export default class HeaderDate extends Component<HeaderSetup, TIME> {
+  constructor($target: HTMLElement, props: HeaderSetup) {
+    super($target, props);
+    this.keys = [headerDateStore, alarmItems];
     this.subscribe();
   }
 
@@ -21,26 +23,48 @@ export default class HeaderDate extends Component<void, TIME> {
   }
 
   setup() {
-    this.showDate();
+    const { isSetup } = this.props;
+    isSetup && this.showDate();
   }
 
   showDate() {
-    const setDate = setState<TIME>(headerDateStore);
     const currentTime = getState<TIME>(headerDateStore);
-    clearTimeout(currentTime?.timer as NodeJS.Timer);
+    const setDate = setState<TIME>(headerDateStore);
 
-    const text = this.getText();
+    const { year, month, day, hour, minute, second } = this.getTime();
+    const text = `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분 ${second}초`;
+
     let timer = setTimeout(() => {
+      clearTimeout(currentTime?.timer as NodeJS.Timer);
       if (currentTime?.text != null) {
         setDate({ ...currentTime, text, timer });
         this.showDate();
       }
     }, 1000);
+
+    this.checkAlarm(hour, minute);
+  }
+
+  checkAlarm(hour: number, minute: number) {
+    const alarmList = getState<AlarmItems>(alarmItems);
+    const setAlarmList = setState(alarmItems);
+
+    let dayText = hour > 12 ? '오후' : '오전';
+    let alarmHour = hour > 12 ? hour - 12 : hour;
+    const alarm = `${dayText} ${alarmHour}시 ${minute}분`;
+    const hasAlarm = alarmList.includes(alarm);
+
+    if (hasAlarm) {
+      window.alert('알람~~');
+      const alarmListUpdated = alarmList.filter(a => a !== alarm);
+      setAlarmList(alarmListUpdated);
+      localStorage.setItem('alarm', JSON.stringify(alarmListUpdated));
+    }
   }
 
   mounted() {}
 
-  getText() {
+  getTime() {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -48,6 +72,6 @@ export default class HeaderDate extends Component<void, TIME> {
     const hour = date.getHours();
     const minute = date.getMinutes();
     const second = date.getSeconds();
-    return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분 ${second}초`;
+    return { year, month, day, hour, minute, second };
   }
 }
