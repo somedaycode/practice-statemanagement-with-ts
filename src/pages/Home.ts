@@ -14,7 +14,7 @@ export default class Home extends Component {
   mountChildComponent() {
     const $header = this.$target.querySelector('[data-component=header]');
     const $home = this.$target.querySelector('[data-component=home]');
-    new Header($header as HTMLElement);
+    new Header($header as HTMLElement, { isSetup: true });
     new Main($home as HTMLElement);
   }
 
